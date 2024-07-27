@@ -1,5 +1,7 @@
 package com.herokuapp.theinternet.pages;
 
+import java.time.Duration;
+
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -51,7 +53,7 @@ public class BasePageObject {
 	 */
 	private void waitFor(ExpectedCondition<WebElement> condition, Integer timeOutInSeconds) {
 		timeOutInSeconds = timeOutInSeconds != null ? timeOutInSeconds : 30;
-		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds));
 		wait.until(condition);
 	}
 
