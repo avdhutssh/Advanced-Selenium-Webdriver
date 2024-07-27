@@ -1,5 +1,3 @@
-.classpath
-.project
 .settings/
 *.png
 *.gif
@@ -7,3 +5,4 @@
 *.css
 target/
 test-output/
+org.eclipse*
