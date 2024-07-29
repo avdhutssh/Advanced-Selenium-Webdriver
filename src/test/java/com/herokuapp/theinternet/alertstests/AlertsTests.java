@@ -44,4 +44,23 @@ public class AlertsTests extends TestUtilities {
 		Assert.assertTrue(result.equals("You clicked: Cancel"),
 				"result is not expected. \nShould be 'You clicked: Cancel', but it is '" + result + "'");
 	}
+
+	@Test
+	public void jsPromptTest() {
+		log.info("Starting jsPromtTest");
+		String alertText = "Hello Alert, it's Avdhut here";
+		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
+		welcomePage.openPage();
+		JavaScriptAlertsPage alertsPage = welcomePage.clickJavaScriptAlertsLink();
+		alertsPage.openJSPrompt();
+		sleep(500);
+		String alertMessage = alertsPage.getAlertText();
+		alertsPage.typeTextIntoAlert(alertText);
+		String result = alertsPage.getResultText();
+		sleep(500);
+		Assert.assertTrue(alertMessage.equals("I am a JS prompt"),
+				"Alert message is not expected. \nShould be 'I am a JS prompt', but it is '" + alertMessage + "'");
+		Assert.assertTrue(result.equals("You entered: " + alertText),
+				"result is not expected. \nShould be 'You entered: " + alertText + "', but it is '" + result + "'");
+	}
 }
