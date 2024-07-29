@@ -26,4 +26,22 @@ public class AlertsTests extends TestUtilities {
 		Assert.assertTrue(result.equals("You successfully clicked an alert"),
 				"result is not expected. \nShould be 'You successfully clicked an alert', but it is '" + result + "'");
 	}
+
+	@Test
+	public void jsDismissTest() {
+		log.info("Starting jsDismissTest");
+		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
+		welcomePage.openPage();
+		JavaScriptAlertsPage alertsPage = welcomePage.clickJavaScriptAlertsLink();
+		alertsPage.openJSConfirm();
+		sleep(500);
+		String alertMessage = alertsPage.getAlertText();
+		alertsPage.dismissAlert();
+		String result = alertsPage.getResultText();
+		sleep(500);
+		Assert.assertTrue(alertMessage.equals("I am a JS Confirm"),
+				"Alert message is not expected. \nShould be 'I am a JS Confirm', but it is '" + alertMessage + "'");
+		Assert.assertTrue(result.equals("You clicked: Cancel"),
+				"result is not expected. \nShould be 'You clicked: Cancel', but it is '" + result + "'");
+	}
 }
