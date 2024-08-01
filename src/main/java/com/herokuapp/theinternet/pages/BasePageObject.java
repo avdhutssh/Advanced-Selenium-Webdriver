@@ -1,7 +1,9 @@
 package com.herokuapp.theinternet.pages;
 
 import java.time.Duration;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
@@ -38,10 +40,20 @@ public class BasePageObject {
 		return driver.findElements(locator);
 	}
 
+	/** Get title of current page */
+	public String getCurrentPageTitle() {
+		return driver.getTitle();
+	}
+
 	/** Click on element with given locator when its visible */
 	protected void click(By locator) {
 		waitForVisibilityOf(locator, 5);
 		find(locator).click();
+	}
+
+	/** Get source of current page */
+	public String getCurrentPageSource() {
+		return driver.getPageSource();
 	}
 
 	/** Type given text into element with given locator */
@@ -86,6 +98,23 @@ public class BasePageObject {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.alertIsPresent());
 		return driver.switchTo().alert();
+	}
+
+	/** Switching to new window */
+	public void switchToWindowWithTitle(String expectedTitle) {
+		String parentWindow = driver.getWindowHandle();
+		Set<String> allwindows = driver.getWindowHandles();
+
+		Iterator<String> windowsIterator = allwindows.iterator();
+		while (windowsIterator.hasNext()) {
+			String windowHandle = windowsIterator.next().toString();
+			if (!windowHandle.equals(parentWindow)) {
+				driver.switchTo().window(windowHandle);
+				if (getCurrentPageTitle().equals(expectedTitle)) {
+					break;
+				}
+			}
+		}
 	}
 
 }
