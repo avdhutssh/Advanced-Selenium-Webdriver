@@ -17,7 +17,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Function;
 
 public class BasePageObject {
 
@@ -122,6 +126,20 @@ public class BasePageObject {
 		return false;
 	}
 
+    public WebElement fluentWait(final By locator, int timeoutInSeconds, int pollingInMillis) {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(timeoutInSeconds))
+                .pollingEvery(Duration.ofMillis(pollingInMillis))
+                .ignoring(NoSuchElementException.class);
+
+        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return driver.findElement(locator);
+            }
+        });
+        return element;
+    }
+    
 	/** Wait for alert present and then switch to it */
 	protected Alert switchToAlert() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));

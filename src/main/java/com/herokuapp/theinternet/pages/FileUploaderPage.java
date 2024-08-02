@@ -59,7 +59,9 @@ public class FileUploaderPage extends BasePageObject {
 
 	public void pushUploadButton() {
 		log.info("Clicking on upload button");
-		waitForElementToBeDisplayed(choseFileFieldLocator, 10);
+//		waitForElementToBeDisplayed(choseFileFieldLocator, 10);
+//		actionClick(uploadButtonLocator);
+		fluentWait(choseFileFieldLocator, 10, 2);
 		actionClick(uploadButtonLocator);
 	}
 
