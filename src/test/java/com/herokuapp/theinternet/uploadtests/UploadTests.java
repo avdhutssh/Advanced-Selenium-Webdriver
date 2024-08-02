@@ -1,5 +1,7 @@
 package com.herokuapp.theinternet.uploadtests;
 
+import java.awt.AWTException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,6 +19,20 @@ public class UploadTests extends TestUtilities {
 		welcomePage.openPage();
 		FileUploaderPage fileUploaderPage = welcomePage.clickFileUploadLink();
 		fileUploaderPage.selectFile(fileName);
+		fileUploaderPage.pushUploadButton();
+		String fileNames = fileUploaderPage.getUploadedFilesNames();
+		Assert.assertTrue(fileNames.contains(fileName),
+				"Our file (" + fileName + ") is not one of the uploaded (" + fileNames + ")");
+	}
+	
+	@Test
+	public void imageUploadUsingRobotClassTest() throws AWTException {
+		log.info("Starting image Upload Using Robot Class Test");
+		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
+		welcomePage.openPage();
+		FileUploaderPage fileUploaderPage = welcomePage.clickFileUploadLink();
+		sleep(1000);
+		fileUploaderPage.selectFileUsingRobotClass(fileName);
 		fileUploaderPage.pushUploadButton();
 		String fileNames = fileUploaderPage.getUploadedFilesNames();
 		Assert.assertTrue(fileNames.contains(fileName),

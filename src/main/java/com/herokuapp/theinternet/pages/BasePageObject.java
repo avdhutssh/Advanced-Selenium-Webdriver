@@ -8,6 +8,7 @@ import java.util.Set;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -120,7 +121,7 @@ public class BasePageObject {
 	}
 
 	/** Switch to iFrame using it's locator */
-	protected void switchToFrame(By frameLocator) {
+	public void switchToFrame(By frameLocator) {
 		driver.switchTo().frame(find(frameLocator));
 	}
 
@@ -133,6 +134,13 @@ public class BasePageObject {
 	public void pressKeyWithActions(Keys key) {
 		log.info("Pressing " + key.name() + " using Actions class");
 		Actions act = new Actions(driver);
-		act.sendKeys(key).perform();   // no need of build()
+		act.sendKeys(key).perform(); // no need of build()
+	}
+
+	/** Click using javascript executor */
+	public void jsClick(By locator) {
+		WebElement element = find(locator);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].click();", element);
 	}
 }
