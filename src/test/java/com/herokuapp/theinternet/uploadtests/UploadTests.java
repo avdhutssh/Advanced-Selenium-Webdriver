@@ -31,7 +31,6 @@ public class UploadTests extends TestUtilities {
 		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
 		welcomePage.openPage();
 		FileUploaderPage fileUploaderPage = welcomePage.clickFileUploadLink();
-		sleep(1000);
 		fileUploaderPage.selectFileUsingRobotClass(fileName);
 		fileUploaderPage.pushUploadButton();
 		String fileNames = fileUploaderPage.getUploadedFilesNames();
