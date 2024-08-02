@@ -3,6 +3,7 @@ package com.herokuapp.theinternet.pages;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
@@ -96,6 +97,8 @@ public class BasePageObject {
 		}
 	}
 
+
+
 	/** Wait for alert present and then switch to it */
 	protected Alert switchToAlert() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -143,4 +146,11 @@ public class BasePageObject {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].click();", element);
 	}
+
+	/** Click using action class */
+	public void actionClick(By locator) {
+		Actions act = new Actions(driver);
+		act.moveToElement(find(locator)).click().build().perform();
+	}
+
 }
