@@ -126,20 +126,18 @@ public class BasePageObject {
 		return false;
 	}
 
-    public WebElement fluentWait(final By locator, int timeoutInSeconds, int pollingInMillis) {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(timeoutInSeconds))
-                .pollingEvery(Duration.ofMillis(pollingInMillis))
-                .ignoring(NoSuchElementException.class);
+	public WebElement fluentWait(final By locator, int timeoutInSeconds, int pollingInMillis) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeoutInSeconds))
+				.pollingEvery(Duration.ofMillis(pollingInMillis)).ignoring(NoSuchElementException.class);
 
-        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                return driver.findElement(locator);
-            }
-        });
-        return element;
-    }
-    
+		WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(locator);
+			}
+		});
+		return element;
+	}
+
 	/** Wait for alert present and then switch to it */
 	protected Alert switchToAlert() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -190,6 +188,7 @@ public class BasePageObject {
 
 	/** Click using action class */
 	public void actionClick(By locator) {
+		waitForVisibilityOf(locator, 5);
 		Actions act = new Actions(driver);
 		act.moveToElement(find(locator)).click().build().perform();
 	}
