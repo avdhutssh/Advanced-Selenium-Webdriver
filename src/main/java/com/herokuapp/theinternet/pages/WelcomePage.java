@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class WelcomePageObject extends BasePageObject {
+public class WelcomePage extends BasePageObject {
 
 	private String pageUrl = "https://the-internet.herokuapp.com/";
 
@@ -16,8 +16,9 @@ public class WelcomePageObject extends BasePageObject {
 	private By editorLinkLocator = By.linkText("WYSIWYG Editor");
 	private By keyPressesLinkLocator = By.linkText("Key Presses");
 	private By fileUploadLinkLocator = By.linkText("File Upload");
-	
-	public WelcomePageObject(WebDriver driver, Logger log) {
+	private By dragAndDropLinkLocator = By.linkText("Drag and Drop");
+
+	public WelcomePage(WebDriver driver, Logger log) {
 		super(driver, log);
 	}
 
@@ -61,22 +62,29 @@ public class WelcomePageObject extends BasePageObject {
 		click(multipleWindowsLinkLocator);
 		return new WindowsPage(driver, log);
 	}
-	
+
 	public EditorPage clickWYSIWYGEditorLink() {
 		log.info("Clicking Multiple Windows link on Welcome Page");
+		scrollToBottom();
 		click(editorLinkLocator);
 		return new EditorPage(driver, log);
 	}
-	
+
 	public KeyPressesPage clickKeyPressesLink() {
 		log.info("Clicking Key Presses link on Welcome Page");
 		click(keyPressesLinkLocator);
 		return new KeyPressesPage(driver, log);
 	}
-	
+
 	public FileUploaderPage clickFileUploadLink() {
 		log.info("Clicking File Upload link on Welcome Page");
 		click(fileUploadLinkLocator);
 		return new FileUploaderPage(driver, log);
+	}
+
+	public DragAndDropPage clickDragAndDropLink() {
+		log.info("Clicking Drag and Drop link on Welcome Page");
+		click(dragAndDropLinkLocator);
+		return new DragAndDropPage(driver, log);
 	}
 }

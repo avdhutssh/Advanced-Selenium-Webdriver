@@ -5,14 +5,14 @@ import org.testng.annotations.Test;
 
 import com.herokuapp.theinternet.base.TestUtilities;
 import com.herokuapp.theinternet.pages.JavaScriptAlertsPage;
-import com.herokuapp.theinternet.pages.WelcomePageObject;
+import com.herokuapp.theinternet.pages.WelcomePage;
 
 public class AlertsTests extends TestUtilities {
 
 	@Test
 	public void jsAlertTest() {
 		log.info("Starting jsAlertTest");
-		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
+		WelcomePage welcomePage = new WelcomePage(driver, log);
 		welcomePage.openPage();
 		JavaScriptAlertsPage alertsPage = welcomePage.clickJavaScriptAlertsLink();
 		alertsPage.openJSAlert();
@@ -30,7 +30,7 @@ public class AlertsTests extends TestUtilities {
 	@Test
 	public void jsDismissTest() {
 		log.info("Starting jsDismissTest");
-		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
+		WelcomePage welcomePage = new WelcomePage(driver, log);
 		welcomePage.openPage();
 		JavaScriptAlertsPage alertsPage = welcomePage.clickJavaScriptAlertsLink();
 		alertsPage.openJSConfirm();
@@ -49,7 +49,7 @@ public class AlertsTests extends TestUtilities {
 	public void jsPromptTest() {
 		log.info("Starting jsPromtTest");
 		String alertText = "Hello Alert, it's Avdhut here";
-		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
+		WelcomePage welcomePage = new WelcomePage(driver, log);
 		welcomePage.openPage();
 		JavaScriptAlertsPage alertsPage = welcomePage.clickJavaScriptAlertsLink();
 		alertsPage.openJSPrompt();
