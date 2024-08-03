@@ -18,6 +18,12 @@ public class DragAndDropPage extends BasePageObject {
 		performDragAndDrop(columnA, columnB);
 	}
 
+	public void dragAtoB_Using_JS_Executor() {
+		log.info("Drag and drop A box on B box using jse");
+		performDragAndDrop_Using_JS(columnA, columnB);
+	}
+	
+	
 	public String getColumnAText() {
 		String text = find(columnA).getText();
 		log.info("Column A Text: " + text);

@@ -21,4 +21,18 @@ public class DragAndDropTests extends TestUtilities {
 		String columnBText = dragAndDropPage.getColumnBText();
 		Assert.assertTrue(columnBText.equals("A"), "Column A header should be B, but it is: " + columnBText);
 	}
+	
+	@Test
+	public void dragAToBTest_Using_JSE() {
+		log.info("Starting dragAToBTest");
+		WelcomePage welcomePage = new WelcomePage(driver, log);
+		welcomePage.openPage();
+		DragAndDropPage dragAndDropPage = welcomePage.clickDragAndDropLink();
+		dragAndDropPage.dragAtoB_Using_JS_Executor();
+		String columnAText = dragAndDropPage.getColumnAText();
+		Assert.assertTrue(columnAText.equals("B"), "Column A header should be B, but it is: " + columnAText);
+		String columnBText = dragAndDropPage.getColumnBText();
+		Assert.assertTrue(columnBText.equals("A"), "Column A header should be B, but it is: " + columnBText);
+	}
+	
 }
