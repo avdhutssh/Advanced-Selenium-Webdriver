@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="herokuapp.theinternet" verbose="1">
+
+    <test name="herokuapp-theinternet-CH">
+        <parameter name="browser" value="chrome"></parameter>
+        <packages>
+            <package name="com.herokuapp.theinternet.*"/>
+        </packages>
+    </test>
+</suite>
+
+    <!--
+      serial execution = 134,042 ms
+      -->
+
