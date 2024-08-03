@@ -227,11 +227,19 @@ public class BasePageObject {
 						+ "simulateHTML5DragAndDrop(source,destination);",
 				find(from), find(to));
 	}
-	
+
 	/** Perform mouse hover over element */
 	public void hoverOverElement(WebElement element) {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).perform();
 	}
 
+	/** Perform mouse hover over element Using JSE */
+	public void hoverOverElementJS(WebElement element) {
+		String script = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', \n"
+				+ "\n"
+				+ "true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript(script, element);
+	}
 }

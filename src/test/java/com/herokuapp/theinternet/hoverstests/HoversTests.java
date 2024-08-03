@@ -12,7 +12,7 @@ public class HoversTests extends TestUtilities {
 	int userNumber = 2;
 
 	@Test
-	public void user2ProfileTest() {
+	public void userProfileTest() {
 		log.info("Starting user2ProfileTest");
 		WelcomePage welcomePage = new WelcomePage(driver, log);
 		welcomePage.openPage();
