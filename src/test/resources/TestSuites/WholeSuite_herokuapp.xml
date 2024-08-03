@@ -3,6 +3,9 @@
 <suite name="herokuapp.theinternet" verbose="1">
 
     <test name="herokuapp-theinternet-CH">
+		<parameter name="username" value="incorrectUsername"></parameter>
+		<parameter name="password" value="SuperSecretPassword!"></parameter>
+		<parameter name="expectedMessage" value="Your username is invalid!"></parameter>
         <parameter name="browser" value="chrome"></parameter>
         <packages>
             <package name="com.herokuapp.theinternet.*"/>
@@ -11,6 +14,6 @@
 </suite>
 
     <!--
-      serial execution = 134,042 ms
+      serial execution = 89 seconds
       -->
 
