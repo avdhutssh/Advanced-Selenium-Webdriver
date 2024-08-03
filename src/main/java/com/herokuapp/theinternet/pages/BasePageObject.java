@@ -193,4 +193,16 @@ public class BasePageObject {
 		act.moveToElement(find(locator)).click().build().perform();
 	}
 
+	/** Scroll to bottom of the page */
+	public void scrollToBottom() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+	}
+
+	/** Drag 'from' element to 'to' element */
+	public void performDragAndDrop(By from, By to) {
+		Actions act = new Actions(driver);
+		act.dragAndDrop(find(from), find(to)).perform();
+	}
+
 }
