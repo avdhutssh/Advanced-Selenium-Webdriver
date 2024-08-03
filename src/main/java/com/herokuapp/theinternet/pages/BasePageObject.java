@@ -179,6 +179,11 @@ public class BasePageObject {
 		act.sendKeys(key).perform(); // no need of build()
 	}
 
+	/** Press Key on locator */
+	public void pressKey(By locator, Keys key) {
+		find(locator).sendKeys(key);
+	}
+
 	/** Click using javascript executor */
 	public void jsClick(By locator) {
 		WebElement element = find(locator);
