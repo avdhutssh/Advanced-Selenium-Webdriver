@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="FileUploadTestSuite_DP" verbose="1">
+	<test name="FileUploadTests">
+		<classes>
+			<class name="com.herokuapp.theinternet.uploadtests.UploadTests">
+				<methods>
+					<exclude name="imageUploadUsingRobotClassTest"></exclude>
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>
