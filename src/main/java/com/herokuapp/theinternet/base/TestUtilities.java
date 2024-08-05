@@ -2,9 +2,8 @@ package com.herokuapp.theinternet.base;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-
+import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -39,10 +38,10 @@ public class TestUtilities extends BaseTest {
 	}
 
 	private static String getTodaysDate() {
-		return (new SimpleDateFormat("yyyyMMdd").format(new Date(0)));
+		return (new SimpleDateFormat("yyyyMMdd").format(new Date()));
 	}
 
 	private static String getSystemTime() {
-		return (new SimpleDateFormat("HHmmssSSS").format(new Date(0)));
+		return (new SimpleDateFormat("HHmmssSSS").format(new Date()));
 	}
 }
