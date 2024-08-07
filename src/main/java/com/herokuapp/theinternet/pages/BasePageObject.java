@@ -9,6 +9,7 @@ import java.util.Set;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -246,5 +247,18 @@ public class BasePageObject {
 				+ "true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript(script, element);
+	}
+	
+	/** Add cookie */
+	public void setCookie(Cookie ck) {
+		log.info("Adding cookie " + ck.getName());
+		driver.manage().addCookie(ck);
+		log.info("Cookie added");
+	}
+	
+	/** Get cookie value using cookie name */
+	public String getCookie(String name) {
+		log.info("Getting value of cookie " + name);
+		return driver.manage().getCookieNamed(name).getValue();
 	}
 }
