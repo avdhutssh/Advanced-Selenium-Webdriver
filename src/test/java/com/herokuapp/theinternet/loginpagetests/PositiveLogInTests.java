@@ -1,5 +1,6 @@
 package com.herokuapp.theinternet.loginpagetests;
 
+import org.openqa.selenium.Cookie;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,8 +19,14 @@ public class PositiveLogInTests extends TestUtilities {
 		takeScreenshot("WelcomePage opened");
 		LoginPage loginPage = welcomePage.clickFormAuthenticationLink();
 		takeScreenshot("LoginPage opened");
+		Cookie ck = new Cookie("custom", "AV", "the-internet.herokuapp.com", "/", null);
+		loginPage.setCookie(ck);
 		SecureAreaPage secureAreaPage = loginPage.logIn("tomsmith", "SuperSecretPassword!");
 		takeScreenshot("SecureAreaPage opened");
+		String custom = secureAreaPage.getCookie("custom");
+		log.info("custom cookie: " + custom);
+		String session = secureAreaPage.getCookie("rack.session");
+		log.info("Session cookie: " + session);
 		Assert.assertEquals(secureAreaPage.getCurrentUrl(), secureAreaPage.getPageUrl());
 		Assert.assertTrue(secureAreaPage.isLogOutButtonVisible(), "LogOut Button is not visible.");
 		String expectedSuccessMessage = "You logged into a secure area!";
