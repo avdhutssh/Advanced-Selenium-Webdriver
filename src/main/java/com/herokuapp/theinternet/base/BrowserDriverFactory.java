@@ -8,41 +8,48 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BrowserDriverFactory {
 
-    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private String browser;
-    private Logger log;
+	private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+	private String browser;
+	private Logger log;
 
-    public BrowserDriverFactory(String browser, Logger log) {
-        this.browser = browser.toLowerCase();
-        this.log = log;
-    }
+	public BrowserDriverFactory(String browser, Logger log) {
+		this.browser = browser.toLowerCase();
+		this.log = log;
+	}
 
-    public WebDriver createDriver() {
-        // Create driver
-        log.info("Create driver: " + browser);
+	public WebDriver createDriver() {
+		// Create driver
+		log.info("Create driver: " + browser);
 
-        switch (browser) {
-            case "chrome":
-                driver.set(new ChromeDriver(getChromeOptions()));
-                break;
+		switch (browser) {
+		case "chrome":
+			driver.set(new ChromeDriver(getChromeOptions()));
+			break;
 
-            case "firefox":
-                driver.set(new FirefoxDriver());
-                break;
+		case "firefox":
+			driver.set(new FirefoxDriver());
+			break;
 
-            default:
-                log.info("Do not know how to start: " + browser + ", starting chrome.");
-                driver.set(new ChromeDriver(getChromeOptions()));
-                break;
-        }
+		default:
+			log.info("Do not know how to start: " + browser + ", starting chrome.");
+			driver.set(new ChromeDriver(getChromeOptions()));
+			break;
+		}
 
-        driver.get().manage().window().maximize();
-        return driver.get();
-    }
+		driver.get().manage().window().maximize();
+		return driver.get();
+	}
 
-    private ChromeOptions getChromeOptions() {
-        ChromeOptions options = new ChromeOptions();
-        // Add additional configurations if needed
-        return options;
-    }
+	public WebDriver createChromeWithProfile(String profile) {
+		log.info("Starting chrome driver with profile: " + profile);
+		ChromeOptions chromeOptions = getChromeOptions();
+		chromeOptions.addArguments("user-data-dir=src/main/resources/Profiles/" + profile);
+		driver.set(new ChromeDriver(chromeOptions));
+		return driver.get();
+	}
+
+	private ChromeOptions getChromeOptions() {
+		ChromeOptions options = new ChromeOptions();
+		return options;
+	}
 }
