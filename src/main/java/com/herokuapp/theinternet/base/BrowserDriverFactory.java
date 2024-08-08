@@ -1,5 +1,8 @@
 package com.herokuapp.theinternet.base;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -44,6 +47,16 @@ public class BrowserDriverFactory {
 		log.info("Starting chrome driver with profile: " + profile);
 		ChromeOptions chromeOptions = getChromeOptions();
 		chromeOptions.addArguments("user-data-dir=src/main/resources/Profiles/" + profile);
+		driver.set(new ChromeDriver(chromeOptions));
+		return driver.get();
+	}
+	
+	public WebDriver createChromeWithMobileEmulation(String deviceName) {
+		log.info("Starting driver with " + deviceName + " emulation]");
+		Map<String, String> mobileEmulation = new HashMap<>();
+		mobileEmulation.put("deviceName", deviceName);
+		ChromeOptions chromeOptions = getChromeOptions();
+		chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
 		driver.set(new ChromeDriver(chromeOptions));
 		return driver.get();
 	}
