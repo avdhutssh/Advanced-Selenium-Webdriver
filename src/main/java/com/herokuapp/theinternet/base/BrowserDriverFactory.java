@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class BrowserDriverFactory {
 
@@ -33,6 +34,22 @@ public class BrowserDriverFactory {
 			driver.set(new FirefoxDriver());
 			break;
 
+		case "chromeheadless":
+			log.info("Starting Chrome in Headless mode");
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--headless");
+			driver.set(new ChromeDriver(chromeOptions));
+			break;
+
+		case "firefoxheadless":
+			log.info("Starting Firefox in Headless mode");
+			FirefoxOptions firefoxOptions = new FirefoxOptions();
+			firefoxOptions.addArguments("--headless");
+			FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("--headless");
+			driver.set(new FirefoxDriver(firefoxOptions));
+			break;
+
 		default:
 			log.info("Do not know how to start: " + browser + ", starting chrome.");
 			driver.set(new ChromeDriver(getChromeOptions()));
@@ -50,7 +67,7 @@ public class BrowserDriverFactory {
 		driver.set(new ChromeDriver(chromeOptions));
 		return driver.get();
 	}
-	
+
 	public WebDriver createChromeWithMobileEmulation(String deviceName) {
 		log.info("Starting driver with " + deviceName + " emulation]");
 		Map<String, String> mobileEmulation = new HashMap<>();
